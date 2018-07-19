@@ -19,6 +19,11 @@
         </div>
 
         <!-- Add reference -->
+        <h2 class="ui header">Add new references</h2>
+        <form method="post">{% csrf_token %}
+            {{ form }}
+            <input type="submit" value="OK">
+        </form>
 
     </div>
 {% endblock %}
