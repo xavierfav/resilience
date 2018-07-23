@@ -23,3 +23,4 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'', include('catalogue.urls')),
 ]
+
