@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.core import serializers
+from django.http import JsonResponse
 from catalogue.models import Category, Reference
 from catalogue.forms import ReferenceForm
 
@@ -17,6 +19,6 @@ def references_table(request):
     else:
         form = ReferenceForm()
 
-    return render(request, 'catalogue/catalogue.html', {'references': references,
-                                                        'form': form
-                                                        })
+    jsondata = serializers.serialize('json', references)
+    
+    return JsonResponse(jsondata, safe=False)
