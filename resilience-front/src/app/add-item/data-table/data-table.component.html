@@ -6,20 +6,27 @@
 
 <table class="table table-striped table-sm table-dark">
   <thead>
-    <tr *ngFor="let rowDataHeader of rowDatasHeader">
-      <th>{{ rowDataHeader.url }}</th>
-      <th>{{ rowDataHeader.name }}</th>
+    <tr>
+      <th *ngFor="let rowDataHeader of rowDatasHeader">{{ rowDataHeader.url }} {{ rowDataHeader.name  }} {{ rowDataHeader.category }}</th>
+      <!-- <th *ngIf="rowDataHeader.name"></th>
+      <th *ngIf="rowDataHeader.category"></th> -->
     </tr>
   </thead>
   <tbody>
+      
     <tr *ngFor="let rowData of rowDatas">
       <td>
-        {{ rowData.url }}
+        {{ rowData.fields.url }}
       </td>
       <td>
-        {{ rowData.name }}
+        {{ rowData.fields.name }}
       </td>
-    </tr>
+      <td *ngFor="let category of categoryDatas; let i of index">
+        <app-category [gridCategoryData]="category"></app-category>
+      </td>
+      </tr>
+      
+    
   </tbody>
 </table>
 </div>
