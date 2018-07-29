@@ -3,17 +3,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-              <label for="name"></label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  class="form-control"
-                  placeholder="Name"
-                  ngModel
-                  required
-                >
-                <label for="url"></label>
+              <label for="url"></label>
                 <input
                   type="text"
                   id="url"
@@ -23,12 +13,22 @@
                   ngModel
                   required
                 >
+                <label for="name"></label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-control"
+                  placeholder="name"
+                  ngModel
+                  required
+                >
                 <div class="col-md-6 add-category">
                   <a [routerLink]="id" (click)="addCategory()">
                     <span class="oi oi-plus"> Add Category</span>
                   </a>
                   <br>
-                  <app-add-category *ngFor="let category of categories; let i = index" [index]="i" [id]="category.id" (tagValue)="onSelected($event)"></app-add-category>
+                  <app-add-category *ngFor="let category of categories; let i = index" [index]="i" [id]="category.id" (categoryValue)="onSelected($event)"></app-add-category>
                   <br>
                 </div>
                 <br>
@@ -38,4 +38,4 @@
     </div>
   </div>
 </div>  
-<app-data-table [gridData]="gridData" *ngIf="gridData.url != undefined"></app-data-table>
+<app-data-table [gridData]="gridData" [rowDatasHeader]="rowHeader" [categoryDatas]="categoryDatas" *ngIf="isSubmited"></app-data-table>

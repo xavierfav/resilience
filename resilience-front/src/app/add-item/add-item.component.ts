@@ -1,9 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { SearchService } from './search.service';
+import { AddItemService } from './add-item.service';
 import { RouterModule, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { map } from 'rxjs/operators';
 import { EventEmitter } from 'events';
 
 @Component({
@@ -13,58 +12,55 @@ import { EventEmitter } from 'events';
 })
 export class AddItemComponent implements OnInit {
 
-  gridData: any[] = [];
   isSubmited: boolean = false;
   categories: any [] = [];
   index: number = 0;
-  tagValue: String;
-  categoryId = {};
-  indexBuf: number = 0;
-  constructor(private searchService: SearchService, private router: Router) { }
+  category: any[] = [];
+  rowHeader: any[] = [];
+  categoryDatas: any[] = [];
+  references: any;
+  
+  
+  constructor(private addItemService: AddItemService, private router: Router) { }
 
   ngOnInit() {
-    
+    this.rowHeader.push({ url: 'URL'});
+    this.rowHeader.push({ name: 'Name' });
   }
 
   addCategory() {
     this.categories.push({id: this.index++});
+    this.rowHeader.push({ category: 'Category' + this.index});
     console.log(this.categories);
   }
 
-  onSelected(value: String) {
-    // for (const prop of Object.keys(this.categoryId)) {
-    //   delete this.categoryId[prop];
-    // }
-    this.tagValue = value;
-    console.log(this.tagValue);
-    //this.categories.splice(1);
-    Object.keys(this.categories).forEach((key)=> {
-      
-      this.categoryId['category' + key] = this.tagValue;
-      // let indexId = this.gridData.indexOf(this.categoryId['category' + key]);
-      // if (indexId != 1) {
-        console.log(this.categoryId);
-        //this.gridData.splice(0, 1, this.categoryId['category' + key]);
-        this.gridData.splice(0, 1, this.categoryId);
-      }
-    );
-    
-    
-    
-    
-    
-    
+  onSelected(value: any) {
+    console.log(value);
+    this.category.forEach((item) => {
+      if (item[0] !== undefined && item[0].id !== undefined && item[0].id === value[0].id) {
+          this.category.splice(this.category.indexOf(item), 1);
+      } 
+    });
+    this.category.push(value);
+  }
+
+  addReferences(references) {
+    this.addItemService.sendUrlAndNameJSON(references)
+      .subscribe(
+        (data) => {
+          console.log('Request successful', data);
+        },
+        (error) => {
+          console.log('ERROR', error);
+        });
   }
 
   onSubmit(form: NgForm) {
-    let categoryId = 'category' + this.index;
-    this.gridData.push({url: form.value.url});
-    this.gridData.push({name: form.value.name});
+    this.categoryDatas = [];
+    this.references = [ {fields: {name: form.value.name, description: null, url: form.value.url, category: []}}];
+    this.categoryDatas = this.category;
     
-
-    console.log(this.gridData);
-    
-    //this.router.navigate['display'];
-    //this.searchService.sendParameters(this.gridData);
+    this.addReferences(this.references);
+    this.isSubmited = true;
   }
 }
