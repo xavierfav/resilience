@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row justify-content-md-left">
+    <div class="col-md-3">
+      <button class="btn btn-primary btn-lg col-md-12 add-reference"(click)="addReference()">
+        <a [routerLink]="id">
+          <span class="category-text"> Add new reference</span>
+        </a>
+      </button>
+      <br>
+    </div>
+    <!-- <div class="col-md-9" *ngIf="isSubmited">
+        <app-data-table [id]="idRef" [rowDatasHeader]="rowHeader" [categoryDatas]="categoryDatas"></app-data-table> 
+    </div> -->
+  </div>
+  <br>
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <ngb-panel title="New Reference" *ngFor="let ref of refs; let i = index" >
+      <ng-template ngbPanelContent>
+        <app-accordion-form [index]="i" [id]="ref.id" (name)="onNameEdit($event)"></app-accordion-form>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+          <label for="url"></label>
+          <input type="text" id="url" name="url" class="form-control" placeholder="URL" ngModel required>
+          <label for="name"></label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Name" ngModel required #name [value]="name">
+          <label for="description"></label>
+          <textarea type="text-area" id="description" name="Description" class="form-control" placeholder="description" ngModel required
+            rows="4"></textarea>
+          <br>
+          <button class="btn btn-primary btn-lg col-md-12" type="submit">Create reference</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="add-category">
+        <button class="btn btn-primary btn-lg col-md-12 category">
+          <a [routerLink]="id" (click)="addCategory()">
+            <span class="category-text"> Add Category</span>
+          </a>
+        </button>
+        <br>
+        <app-add-category *ngFor="let category of categories; let i = index" [index]="i" [id]="category.id" (categoryValue)="onSelected($event)"></app-add-category>
+        <br>
+      </div>
+    </div>
+  </div>
