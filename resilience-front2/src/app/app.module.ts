@@ -18,11 +18,15 @@ import { CategoryComponent } from './add-item/data-table/category/category.compo
 import { DataTableService } from './add-item/data-table/data-table.service';
 import { ReferencesData } from './shared/references-data';
 import { AccordionFormComponent } from './add-item/accordion-form/accordion-form.component';
+import { PanelComponent } from './add-item/panel/panel.component';
 
 
 const appRoutes: Routes = [
-  { path: 'addReference', component: AddItemComponent },
-  { path: 'addReference/:id', component: AccordionFormComponent },
+  { path: 'addReference', component: AddItemComponent,
+   children: [ { path: 'addReference/:id', component: AccordionFormComponent },
+               { path: 'referenceName/:id', component: PanelComponent }
+             ] 
+  },
   { path: 'addCategory/:id', component: AddCategoryComponent },
   { path: 'display', component: DataTableComponent },
   { path: '', component: AddItemComponent }
@@ -37,7 +41,8 @@ const appRoutes: Routes = [
     DataTableComponent,
     AddCategoryComponent,
     CategoryComponent,
-    AccordionFormComponent
+    AccordionFormComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,
