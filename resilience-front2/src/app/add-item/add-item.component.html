@@ -13,10 +13,10 @@
     </div> -->
   </div>
   <br>
-  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" *ngFor="let ref of refs; let i = index">
-    <ngb-panel>
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <ngb-panel *ngFor="let ref of refs; let i = index">
         <ng-template ngbPanelTitle>
-          <app-panel [index]="i" [id]="ref.id" [title]="title"></app-panel>
+          {{ ref.panelTitle }}
         </ng-template>
         <ng-template ngbPanelContent>
           <app-accordion-form [index]="i" [id]="ref.id" (panelName)="onNameEdit($event)"></app-accordion-form>

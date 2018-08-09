@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AddItemService } from './add-item.service';
-import { Router, RouterModule } from '../../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-accordion-form',
@@ -20,7 +20,7 @@ export class AccordionFormComponent implements OnInit {
   idRef: number;
   title: any;
 
-  constructor(private addItemService: AddItemService, private router: Router, private route: Router) { }
+  constructor(private addItemService: AddItemService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.addItemService.getReferences()
@@ -68,10 +68,9 @@ export class AccordionFormComponent implements OnInit {
         });
   }
   onSubmit(form: NgForm) {
-    this.reference = { url: form.value.url, name: form.value.name, description: null, category: []};
+    this.reference = { url: form.value.url, name: form.value.name, description: form.value.description, category: []};
     
     this.addReferences(this.reference);
     this.panelName.emit(form.value.name);
-    this.router.navigate(['../referenceName'], { relativeTo: this.route });
   }
 }

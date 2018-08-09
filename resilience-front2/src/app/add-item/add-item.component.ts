@@ -25,27 +25,25 @@ export class AddItemComponent implements OnInit {
   idRef: number;
   showForm: boolean;
   refs: any[] = [];
-  title: String;
+  title: any[] = [];
   @ViewChild('name') name: ElementRef;
 
   constructor(private dataTableService: DataTableService, private router: Router) { }
 
   ngOnInit() {
+    
   }
 
   addReference() {
-    this.refs.push({id: this.index++});
+    this.refs.push({id: this.index++, panelTitle: 'New Reference' });
     console.log(this.refs);
   }
 
   onNameEdit(value) {
     if (value !== undefined) {
-      this.title = value;
-    } else {
-      this.title = 'New Reference';
-    }
-    
-    console.log(value);
+      this.refs[this.index - 1].panelTitle = value;
+    } 
+    console.log(this.title);
   }
 
  
