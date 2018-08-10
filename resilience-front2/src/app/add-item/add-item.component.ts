@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { EventEmitter } from 'events';
 import { DataTableService } from './data-table/data-table.service';
+import { AddItemService } from './accordion-form/add-item.service';
+import { ReferencesImpl } from '../shared/ReferencesImpl.model';
 
 @Component({
   selector: 'app-add-item',
@@ -18,7 +20,6 @@ export class AddItemComponent implements OnInit {
   index: number = 0;
   category: any[] = [];
   categoryDatas: any[] = [];
-  references: any;
   reference: any;
   referencessSubscription: any;
   timerSubscription: any;
@@ -26,24 +27,42 @@ export class AddItemComponent implements OnInit {
   showForm: boolean;
   refs: any[] = [];
   title: any[] = [];
-  @ViewChild('name') name: ElementRef;
+  //@ViewChild('name') name: ElementRef;
 
-  constructor(private dataTableService: DataTableService, private router: Router) { }
+  constructor(private addItemService: AddItemService) { }
 
   ngOnInit() {
-    
+    this.addItemService.getReferences()
+    .pipe(
+      map(references => references.map(i => new ReferencesImpl(i)))
+    )
+    .subscribe(
+      (references) => {
+        console.log('Request successful', references);
+        if (references != null) {
+          references.forEach((reference) => {
+            this.refs.push({ id: reference.id, name: reference.name, url: reference.url, description: reference.description });
+          })
+          this.index = references[references.length - 1].id;
+          console.log(this.index);
+        }
+      },
+      (error) => {
+        console.log('ERROR', error);
+      }
+    );
   }
 
   addReference() {
-    this.refs.push({id: this.index++, panelTitle: 'New Reference' });
-    console.log(this.refs);
+      this.refs.push({id: this.index++, name: 'New Reference' });
+      console.log(this.refs);
   }
 
-  onNameEdit(value) {
+  onNameEdit(value, i) {
+    console.log(value);
     if (value !== undefined) {
-      this.refs[this.index - 1].panelTitle = value;
+      this.refs[i].name = value;
     } 
-    console.log(this.title);
   }
 
  

@@ -11,7 +11,10 @@ import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router
 export class AccordionFormComponent implements OnInit {
 
   @Input() index:number;
-  @Input() i: number;
+  @Input() id: number;
+  @Input() description: string;
+  @Input() name: string;
+  @Input() url: string;
   @Output() panelName = new EventEmitter<String>();
   categories: any;
   category: any;
@@ -19,23 +22,12 @@ export class AccordionFormComponent implements OnInit {
   references: any;
   idRef: number;
   title: any;
+  isFormSubmitted: boolean = false;
 
-  constructor(private addItemService: AddItemService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private addItemService: AddItemService) { }
 
   ngOnInit() {
-    this.addItemService.getReferences()
-    // .pipe(map(
-    //   (data: any) => JSON.parse(data)
-    // ))
-    .subscribe(
-      (data) => {
-        console.log('Request successful', data);
-        this.references = data;
-      },
-      (error) => {
-        console.log('ERROR', error);
-      }
-    ); 
+     console.log(this.name, this.url, this.description);
   }
 
   addCategory() {
@@ -61,16 +53,21 @@ export class AccordionFormComponent implements OnInit {
           this.references = data;
           this.idRef = this.references.id
           console.log(this.idRef);
+          this.addItemService.getOneReference(this.idRef);
+          
           //this.refreshData();
         },
         (error) => {
           console.log('ERROR', error);
         });
   }
+
   onSubmit(form: NgForm) {
     this.reference = { url: form.value.url, name: form.value.name, description: form.value.description, category: []};
     
     this.addReferences(this.reference);
     this.panelName.emit(form.value.name);
+    this.isFormSubmitted = true;
+    form.form.markAsPristine;
   }
 }

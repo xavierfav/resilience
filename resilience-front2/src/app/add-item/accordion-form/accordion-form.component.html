@@ -3,12 +3,12 @@
       <div class="form-group">
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
           <label for="url"></label>
-          <input type="text" id="url" name="url" class="form-control" placeholder="URL" ngModel required>
+          <input type="text" id="url" name="url" class="form-control" placeholder="URL" ngModel required [disabled]="isFormSubmitted" [value]="url">
           <label for="name"></label>
-          <input type="text" id="name" name="name" class="form-control" placeholder="Name" ngModel required #name [value]="panelName">
+          <input type="text" id="name" name="name" class="form-control" placeholder="Name" ngModel required [disabled]="isFormSubmitted" [value]="name">
           <label for="description"></label>
           <textarea type="text-area" id="description" name="Description" class="form-control" placeholder="description" ngModel required
-            rows="4"></textarea>
+            rows="4" [disabled]="isFormSubmitted" [value]="description"></textarea>
           <br>
           <button class="btn btn-primary btn-lg col-md-12" type="submit">Create reference</button>
         </form>

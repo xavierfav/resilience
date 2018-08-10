@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { RequestOptions } from '@angular/http';
 import { CookieService } from 'ngx-cookie-service';
+import { References } from '../../shared/references.model';
 
 // import { HttpClient } from '@angular/common/http';
 
@@ -38,6 +37,10 @@ export class AddItemService {
   }
 
   getReferences() {
-    return this.httpClient.get(this.url);
+    return this.httpClient.get<References[]>(this.url);
+  }
+
+  getOneReference(id) {
+    return this.httpClient.get(this.url + '/' + id);
   }
 }
