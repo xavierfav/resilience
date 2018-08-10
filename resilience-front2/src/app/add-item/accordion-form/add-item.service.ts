@@ -41,6 +41,6 @@ export class AddItemService {
   }
 
   getOneReference(id) {
-    return this.httpClient.get(this.url + '/' + id);
+    return this.httpClient.get<References>(this.url + '/' + id);
   }
 }

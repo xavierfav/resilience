@@ -1,12 +1,8 @@
-import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { EventEmitter } from 'events';
-import { DataTableService } from './data-table/data-table.service';
 import { AddItemService } from './accordion-form/add-item.service';
 import { ReferencesImpl } from '../shared/ReferencesImpl.model';
+import { NgbAccordion, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-item',
@@ -21,13 +17,12 @@ export class AddItemComponent implements OnInit {
   category: any[] = [];
   categoryDatas: any[] = [];
   reference: any;
-  referencessSubscription: any;
-  timerSubscription: any;
+  references: any;
   idRef: number;
   showForm: boolean;
   refs: any[] = [];
   title: any[] = [];
-  //@ViewChild('name') name: ElementRef;
+  @ViewChild('acc') accordionComponent: NgbAccordion;
 
   constructor(private addItemService: AddItemService) { }
 
@@ -54,29 +49,39 @@ export class AddItemComponent implements OnInit {
   }
 
   addReference() {
-      this.refs.push({id: this.index++, name: 'New Reference' });
+      this.refs.push({id: this.index++, name: 'New Reference', url: 'New URL', description: 'New Description' });
       console.log(this.refs);
   }
 
-  onNameEdit(value, i) {
+  onTogglePanel(value, i) {
     console.log(value);
     if (value !== undefined) {
-      this.refs[i].name = value;
+      this.refs[i].name = value.name;
+      this.refs[i].url = value.url;
+      this.refs[i].description = value.description;
     } 
   }
 
- 
-
-  // private refreshData(): void {
-  //   this.referencessSubscription = this.dataTableService.getOneReference(this.references.id).subscribe(reference => {
-  //       this.references = reference;
-  //       console.log('Request getOneReference successful', reference);
-  //       this.subscribeToData();
-  //   });
-  // }
-
-  // private subscribeToData(): void {
-  //     this.timerSubscription = Observable.timer(5000).first().subscribe(() => this.refreshData());
-  // }
+  getReference(index) {
+    this.addItemService.getOneReference(index)
+      .subscribe(
+        (reference) => {
+        console.log ('Request getOneReference successful', reference);
+      },
+        (error) => console.log('ERROR request getOneReference', error)
+      );
+  }
   
+
+   toggleAccordion(props: NgbPanelChangeEvent): void {
+    props.nextState // true === panel is toggling to an open state 
+                               // false === panel is toggling to a closed state
+    props.panelId = props.panelId.split('ngb-panel-')[1];  // the ID of the panel that was clicked
+    if (props.nextState == true) {
+      this.getReference(+props.panelId + 1);
+    }
+    
+    // this.refs.push({ id: this.reference.id, name: this.reference.name, url: this.reference.url, description: this.reference.description });
+    //props.preventDefault(); // don't toggle the state of the selected panel
+ }
 }
