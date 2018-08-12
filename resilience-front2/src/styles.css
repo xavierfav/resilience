@@ -1,2 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
+
+
+.card-header {
+    background-color: rgba(108, 12, 153, 0.555);
+}
+
+  
+.card-body{
+    background-color: rgba(8, 85, 121, 0.438)
+ }
+
+.btn-link {
+    color: black;
+}
