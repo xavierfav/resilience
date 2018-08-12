@@ -13,7 +13,7 @@ export class AddItemComponent implements OnInit {
 
   isSubmited: boolean = false;
   categories: any [] = [];
-  index: number = 0;
+  index: any = 0;
   category: any[] = [];
   categoryDatas: any[] = [];
   reference: any;
@@ -22,6 +22,8 @@ export class AddItemComponent implements OnInit {
   showForm: boolean;
   refs: any[] = [];
   title: any[] = [];
+  lastCreated: any = [];
+  createOrUpdate: string = 'Create Reference';
   @ViewChild('acc') accordionComponent: NgbAccordion;
 
   constructor(private addItemService: AddItemService) { }
@@ -46,16 +48,22 @@ export class AddItemComponent implements OnInit {
         console.log('ERROR', error);
       }
     );
+    // this.accordionComponent.activeIds = [];
   }
 
   addReference() {
-      this.refs.push({id: this.index++, name: 'New Reference', url: 'New URL', description: 'New Description' });
-      console.log(this.refs);
+      this.refs.push({id: this.index + 1, name: '', url: '', description: '' });
+      console.log('references value when adding new', this.refs);
+      // this.accordionComponent.activeIds = 'ngb-panel-' + (this.index + 1);
+      this.lastCreated = 'ngb-panel-' + (this.index + 1);
+      this.index++;
+      
   }
 
   onTogglePanel(value, i) {
     console.log(value);
     if (value !== undefined) {
+      this.refs[i].id = value.id;
       this.refs[i].name = value.name;
       this.refs[i].url = value.url;
       this.refs[i].description = value.description;
@@ -73,12 +81,18 @@ export class AddItemComponent implements OnInit {
   }
   
 
-   toggleAccordion(props: NgbPanelChangeEvent): void {
+   toggleAccordion(props: NgbPanelChangeEvent, acc: NgbAccordion): void {
+     console.log(acc);
     props.nextState // true === panel is toggling to an open state 
                                // false === panel is toggling to a closed state
+    
     props.panelId = props.panelId.split('ngb-panel-')[1];  // the ID of the panel that was clicked
     if (props.nextState == true) {
-      this.getReference(+props.panelId + 1);
+      this.getReference(+props.panelId);
+      acc.type = 'secondary';
+      this.createOrUpdate = 'Edit Reference';
+    } else {
+      acc.type = 'default';
     }
     
     // this.refs.push({ id: this.reference.id, name: this.reference.name, url: this.reference.url, description: this.reference.description });

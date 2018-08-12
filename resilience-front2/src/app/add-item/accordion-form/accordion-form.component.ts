@@ -14,6 +14,7 @@ export class AccordionFormComponent implements OnInit {
 
   @Input() index:number;
   @Input() id: number;
+  @Input() createOrUpdate: string;
   description: any;
   name: any;
   url: any;
@@ -35,6 +36,7 @@ export class AccordionFormComponent implements OnInit {
   }
 
   ngOnChanges() {
+    this.id = this.references.id;
     this.url = this.references.url;
     this.name = this.references.name;
     this.description = this.references.description;
@@ -66,6 +68,7 @@ export class AccordionFormComponent implements OnInit {
           //console.log(ref);
           //this.refs.push(ref);
           //this.refs.emit(ref);
+          this.id = ref.id;
           this.name = ref.name;
           this.url = ref.url;
           this.description = ref.description;
@@ -77,7 +80,8 @@ export class AccordionFormComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     //this.reference = { id: form.value.i, url: form.value.url, name: form.value.name, description: form.value.description, category: []};
-    this.reference = form.value;
+    console.log('form value when submitting', form.value);
+    this.reference = { id: this.index, name: form.value.name, url: form.value.url, description: form.value.description };
     this.addReferences(this.reference);
     this.panel.emit(this.reference);
     this.isFormSubmitted = true;
