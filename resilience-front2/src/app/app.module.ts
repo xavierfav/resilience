@@ -9,6 +9,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
@@ -16,13 +19,13 @@ import { HeaderComponent } from './header/header.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { DataTableComponent } from './add-item/data-table/data-table.component';
 import { AddItemService } from './add-item/accordion-form/add-item.service';
-import { AddCategoryComponent } from './add-item/add-category/add-category.component';
+import { AddCategoryComponent } from './add-item/accordion-form/add-category/add-category.component';
 import { CategoryComponent } from './add-item/data-table/category/category.component';
 import { DataTableService } from './add-item/data-table/data-table.service';
 import { ReferencesData } from './shared/references-data';
 import { AccordionFormComponent } from './add-item/accordion-form/accordion-form.component';
 import { DeleteItemComponent } from './add-item/delete-item/delete-item.component';
-
+import { MatInputModule } from '@angular/material';
 
 const appRoutes: Routes = [
   { path: 'addReference', component: AddItemComponent,
@@ -54,7 +57,11 @@ const appRoutes: Routes = [
     HttpClientInMemoryWebApiModule.forRoot(ReferencesData, { dataEncapsulation: false }),
     NgbModule.forRoot(),
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [ 
     AddItemService,
