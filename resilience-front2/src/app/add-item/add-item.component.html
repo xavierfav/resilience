@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-md-left">
     <div class="col-md-3">
-      <button class="btn btn-primary btn-lg col-md-12 add-reference"(click)="addReference()">
+      <button class="btn btn-primary btn-lg col-md-12 add-reference"(click)="addReference(acc)">
         <a [routerLink]="id">
           <span class="category-text"> Add new reference</span>
         </a>
@@ -13,16 +13,20 @@
     </div> -->
   </div>
   <br>
-  <ngb-accordion #acc="ngbAccordion" [activeIds]="lastCreated" type="default" *ngFor="let ref of refs; let i = index" (panelChange)="toggleAccordion($event, acc)">
+  <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" [activeIds]="lastCreated" type="default" *ngFor="let ref of refs; let i = index" (panelChange)="toggleAccordion($event, acc)">
     <ngb-panel>
         <ng-template *ngIf="ref.name; else newReference" ngbPanelTitle>
           {{ ref.name }}
+          
         </ng-template>
+        <app-delete-item [index]="i"></app-delete-item>
         <ng-template #newReference ngbPanelTitle>
           New Reference
+          
         </ng-template>
+        
         <ng-template ngbPanelContent>
-          <app-accordion-form [index]="i" [id]="ref.id" (panel)="onTogglePanel($event, i)" [references]="ref" [createOrUpdate]="createOrUpdate"></app-accordion-form>
+          <app-accordion-form [index]="i" [id]="ref.id" (submit)="isSubmitted($event, i)" (panel)="onTogglePanel($event, i)" [references]="ref" [createOrUpdate]="createOrUpdate"></app-accordion-form>
         </ng-template>
     </ngb-panel>
   </ngb-accordion>

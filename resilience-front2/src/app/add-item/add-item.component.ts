@@ -23,11 +23,12 @@ export class AddItemComponent implements OnInit {
   refs: any[] = [];
   title: any[] = [];
   lastCreated: any = [];
-  createOrUpdate: string = 'Create Reference';
-  @ViewChild('acc') accordionComponent: NgbAccordion;
+  createOrUpdate: string;
+  submit: boolean;
 
   constructor(private addItemService: AddItemService) { }
 
+  // OnInit component => get all the references from the DB
   ngOnInit() {
     this.addItemService.getReferences()
     .pipe(
@@ -48,18 +49,18 @@ export class AddItemComponent implements OnInit {
         console.log('ERROR', error);
       }
     );
-    // this.accordionComponent.activeIds = [];
   }
 
-  addReference() {
+  // Add new reference on clic 'Add Reference'
+  addReference(acc :NgbAccordion) {
       this.refs.push({id: this.index + 1, name: '', url: '', description: '' });
       console.log('references value when adding new', this.refs);
-      // this.accordionComponent.activeIds = 'ngb-panel-' + (this.index + 1);
       this.lastCreated = 'ngb-panel-' + (this.index + 1);
       this.index++;
-      
+      this.createOrUpdate = 'Create Reference';
   }
 
+  // When panel is open, display the values
   onTogglePanel(value, i) {
     console.log(value);
     if (value !== undefined) {
@@ -70,6 +71,7 @@ export class AddItemComponent implements OnInit {
     } 
   }
 
+  // subscription to display one reference into the panel given the ID
   getReference(index) {
     this.addItemService.getOneReference(index)
       .subscribe(
@@ -80,22 +82,27 @@ export class AddItemComponent implements OnInit {
       );
   }
   
+  isSubmitted(value) {
+    this.submit = value;
+  }
 
+  // Manage the colors and create/update button when toggling panels
    toggleAccordion(props: NgbPanelChangeEvent, acc: NgbAccordion): void {
      console.log(acc);
-    props.nextState // true === panel is toggling to an open state 
-                               // false === panel is toggling to a closed state
-    
-    props.panelId = props.panelId.split('ngb-panel-')[1];  // the ID of the panel that was clicked
-    if (props.nextState == true) {
-      this.getReference(+props.panelId);
+     acc.type = 'default';
+     var index = props.panelId.split('ngb-panel-')[1]; 
+    if (props.nextState == true && this.refs[index].url != '') {
+      this.getReference(+index);
       acc.type = 'secondary';
-      this.createOrUpdate = 'Edit Reference';
+      this.createOrUpdate = 'Update Reference';
+      this.lastCreated = 'ngb-panel-' + (index);
+    } else if (props.nextState == true && this.refs[index].url == ''){
+      acc.type = 'secondary';
+      this.createOrUpdate = 'Create Reference';
+      this.lastCreated = 'ngb-panel-' + (index);
     } else {
+      acc.toggle;
       acc.type = 'default';
     }
-    
-    // this.refs.push({ id: this.reference.id, name: this.reference.name, url: this.reference.url, description: this.reference.description });
-    //props.preventDefault(); // don't toggle the state of the selected panel
- }
+  }
 }
