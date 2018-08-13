@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { AddItemService } from './accordion-form/add-item.service';
 import { ReferencesImpl } from '../shared/ReferencesImpl.model';
+import { References } from '../shared/references.model';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AddItemComponent implements OnInit {
   categoryDatas: any[] = [];
   reference: any;
   references: any;
-  idRef: number;
+  id: number;
   showForm: boolean;
   refs: any[] = [];
   title: any[] = [];
@@ -135,8 +136,22 @@ export class AddItemComponent implements OnInit {
      if (this.refs[index].url === '') {
       this.createOrUpdate = 'Create Reference';
     } else {
-      this.getReference(index);
+      this.getReference(this.refs[index].id);
       this.createOrUpdate = 'Update Reference';
     }
+  }
+
+  deleteReference(index) {
+    console.log('index to delete', index);
+    this.addItemService.deleteReference(index)
+      .subscribe(
+        (ref: any) => { 
+          console.log('Delete success', ref);
+        },
+        (error) => {
+          console.log('ERROR', error);
+        }
+      );
+    this.refs.splice(index, 1);
   }
 }

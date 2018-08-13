@@ -6,7 +6,7 @@
           <span class="category-text"> Add new reference</span>
         </a>
       </button>
-      <button class="btn btn-danger btn-lg offset-md-4 col-md-4 delete-reference" (click)="deleteReference()">
+      <button class="btn btn-danger btn-lg offset-md-4 col-md-4 delete-reference">
           <a [routerLink]="id">
             <span class="category-text"> Delete references</span>
           </a>
@@ -50,7 +50,7 @@
            <ng-template #newUrl>
               <span>New URL</span>
             </ng-template>
-           <button mat-button color="danger"><app-delete-item [id]="i"></app-delete-item></button>
+           <button mat-button color="danger" (click)="deleteReference(i)"> X </button>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
