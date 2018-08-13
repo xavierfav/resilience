@@ -15,8 +15,11 @@
   <br>
   <ngb-accordion #acc="ngbAccordion" [activeIds]="lastCreated" type="default" *ngFor="let ref of refs; let i = index" (panelChange)="toggleAccordion($event, acc)">
     <ngb-panel>
-        <ng-template ngbPanelTitle>
+        <ng-template *ngIf="ref.name; else newReference" ngbPanelTitle>
           {{ ref.name }}
+        </ng-template>
+        <ng-template #newReference ngbPanelTitle>
+          New Reference
         </ng-template>
         <ng-template ngbPanelContent>
           <app-accordion-form [index]="i" [id]="ref.id" (panel)="onTogglePanel($event, i)" [references]="ref" [createOrUpdate]="createOrUpdate"></app-accordion-form>
