@@ -1,0 +1,13 @@
+input, textarea {
+    background-color: white;
+    width: 100%;
+}
+
+.big-class {
+  display: flex;
+  flex-direction: column;
+}
+
+.big-class > * {
+    width: 100%;
+}

@@ -45,21 +45,21 @@ export class AccordionFormComponent implements OnInit {
   }
 
   // Permits to add new category but not functional for now
-  addCategory() {
-    this.categories.push({id: this.index++});
-    console.log(this.categories);
-  }
+  // addCategory() {
+  //   this.categories.push({id: this.index++});
+  //   console.log(this.categories);
+  // }
 
   // idem
-  onSelected(value: any) {
-    console.log(value);
-    this.category.forEach((item) => {
-      if (item[0] !== undefined && item[0].id !== undefined && item[0].id === value[0].id) {
-          this.category.splice(this.category.indexOf(item), 1);
-      } 
-    });
-    this.category.push(value);
-  }
+  // onSelected(value: any) {
+  //   console.log(value);
+  //   this.category.forEach((item) => {
+  //     if (item[0] !== undefined && item[0].id !== undefined && item[0].id === value[0].id) {
+  //         this.category.splice(this.category.indexOf(item), 1);
+  //     } 
+  //   });
+  //   this.category.push(value);
+  // }
 
   // subscription of the post method to add a new reference
   addReferences(reference) {

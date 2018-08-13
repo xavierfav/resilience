@@ -1,0 +1,21 @@
+<mat-menu #rootMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="subMenu1">Power</button>
+    <button mat-menu-item [matMenuTriggerFor]="subMenu2">System settings</button>
+  </mat-menu>
+  
+  <mat-menu #subMenu1="matMenu">
+    <button mat-menu-item>Shut down</button>
+    <button mat-menu-item>Restart</button>
+    <button mat-menu-item>Hibernate</button>
+  </mat-menu>
+
+  <mat-menu #subMenu2="matMenu">
+      <button mat-menu-item>Test</button>
+      <button mat-menu-item>Retest</button>
+      <button mat-menu-item>Reretest</button>
+    </mat-menu>
+  
+  <button mat-icon-button [matMenuTriggerFor]="rootMenu">
+    <mat-icon>add</mat-icon>
+    <span>Add Category</span>
+  </button>

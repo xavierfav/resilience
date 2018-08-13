@@ -22,3 +22,16 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.mat-expansion-panel-header {
+    background-color: rgba(198, 178, 236, 0.315);
+}
+
+.url-forward {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.url-forward-parent {
+    display:table;
+}
