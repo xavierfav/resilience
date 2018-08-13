@@ -3,10 +3,10 @@
     <div class="col-md-12">
       <button class="btn btn-primary btn-lg col-md-4 add-reference"(click)="addReference()">
         <a [routerLink]="id">
-          <span class="category-text" (click)="toOpen == id"> Add new reference</span>
+          <span class="category-text"> Add new reference</span>
         </a>
       </button>
-      <button class="btn btn-danger btn-lg offset-md-4 col-md-4 delete-reference"(click)="deleteReference()">
+      <button class="btn btn-danger btn-lg offset-md-4 col-md-4 delete-reference" (click)="deleteReference()">
           <a [routerLink]="id">
             <span class="category-text"> Delete references</span>
           </a>
@@ -33,7 +33,7 @@
   <!-- </ngb-accordion> -->
 
   <mat-accordion class="example-headers-align" >
-      <mat-expansion-panel #accordion *ngFor="let ref of refs; let i = index" [id]="ref.id" [expanded]="isCreated" (opened)="setStep(i)" hideToggle multi>
+      <mat-expansion-panel #accordion *ngFor="let ref of refs; let i = index" [id]="ref.id" [expanded]="step === i" (opened)="setStep(i)" multi="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <div *ngIf="ref.name; else newRef">

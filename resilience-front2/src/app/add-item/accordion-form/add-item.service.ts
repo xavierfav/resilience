@@ -36,6 +36,12 @@ export class AddItemService {
     return this.httpClient.post(this.url, data, this.options);
   }
 
+  updateReference(data) {
+    this.options = { headers: this.headers};
+    //let body = JSON.stringify(data);
+    return this.httpClient.post(this.url + '/' + data.id, this.options);
+  }
+
   getReferences() {
     return this.httpClient.get<References[]>(this.url);
   }

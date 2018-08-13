@@ -23,9 +23,9 @@ export class AddItemComponent implements OnInit {
   refs: any[] = [];
   title: any[] = [];
   lastCreated: any = [];
-  createOrUpdate: string = 'Create Reference';
+  createOrUpdate: string = 'Update Reference';
   submit: boolean;
-  step = 0;
+  step: number;
   isCreated: boolean = false;
   @ViewChild('accordion') acc;
 
@@ -59,7 +59,6 @@ export class AddItemComponent implements OnInit {
       this.refs.push({id: this.index + 1, name: '', url: '', description: '' });
       console.log('references value when adding new', this.refs);
       this.index++;
-      this.createOrUpdate = 'Create Reference';
       console.log(this.acc.id);
       this.isCreated = true;
   }
@@ -88,6 +87,7 @@ export class AddItemComponent implements OnInit {
   
   isSubmitted(value) {
     this.submit = value;
+    console.log('form is submitted ?', value);
   }
 
   // Manage the colors and create/update button when toggling panels
@@ -110,21 +110,33 @@ export class AddItemComponent implements OnInit {
   //   }
   // }
 
-  // preventOpening(event:Event) {
-  //   event.preventDefault();
-  //   console.log("Clicked");
-  //   event.stopPropagation();
-  // }
+  preventOpening(event:Event) {
+    event.preventDefault();
+    console.log("Clicked");
+    event.stopPropagation();
+  }
 
-  // setStep(index: number) {
-  //   this.step = index;
-  // }
+  setStep(index: number) {
+    this.step = index;
+    this.shouldGetRef(this.step);
+  }
 
-  // nextStep() {
-  //   this.step++;
-  // }
+  nextStep() {
+    this.step++;
+    this.shouldGetRef(this.step);
+  }
 
-  // prevStep() {
-  //   this.step--;
-  // }
+  prevStep() {
+    this.step--;
+    this.shouldGetRef(this.step);
+  }
+
+  shouldGetRef(index){
+     if (this.refs[index].url === '') {
+      this.createOrUpdate = 'Create Reference';
+    } else {
+      this.getReference(index);
+      this.createOrUpdate = 'Update Reference';
+    }
+  }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AddItemService } from './add-item.service';
+import { map } from 'rxjs/operators';
+import { ReferencesImpl } from '../../shared/ReferencesImpl.model';
 
 @Component({
   selector: 'app-accordion-form',
@@ -64,7 +66,7 @@ export class AccordionFormComponent implements OnInit {
       .subscribe(
         (ref: any) => {
           console.log('Request sendReferences successful', ref);
-          this.id = ref.id;
+          //this.id = ref.id;
           this.name = ref.name;
           this.url = ref.url;
           this.description = ref.description;
@@ -74,13 +76,31 @@ export class AccordionFormComponent implements OnInit {
         });
   }
 
+  updateReference(reference) {
+    this.addItemService.updateReference(reference)
+      .subscribe(
+        (ref) => {
+          console.log('Request updateReference successful', ref);
+        },
+        (error) => {
+          console.log('ERROR', error);
+        }
+      )
+  }
+
   // Action to perform when submitting the form (e.g. a new reference)
   onSubmit(form: NgForm) {
-    console.log('form value when submitting', form.value);
-    this.reference = { id: this.index, name: form.value.name, url: form.value.url, description: form.value.description };
+    console.log('form value when submitting', form.value, this.id);
+    this.reference = { id: this.id, name: form.value.name, url: form.value.url, description: form.value.description };
     this.panel.emit(this.reference);
     this.submit.emit(!this.isSubmitted);
-    this.addReferences(this.reference);
+
+    if (form.form.dirty && this.createOrUpdate == 'Create Reference') {
+      this.addReferences(this.reference);
+    } else if (form.form.dirty && this.createOrUpdate == 'Update Reference') {
+      this.updateReference(this.reference);
+    }
+
     this.createOrUpdate = 'Update Reference';
     form.form.markAsPristine;
     this.isSubmitted = true;
