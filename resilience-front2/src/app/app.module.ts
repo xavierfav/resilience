@@ -6,6 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
@@ -18,6 +21,7 @@ import { CategoryComponent } from './add-item/data-table/category/category.compo
 import { DataTableService } from './add-item/data-table/data-table.service';
 import { ReferencesData } from './shared/references-data';
 import { AccordionFormComponent } from './add-item/accordion-form/accordion-form.component';
+import { DeleteItemComponent } from './add-item/delete-item/delete-item.component';
 
 
 const appRoutes: Routes = [
@@ -38,15 +42,19 @@ const appRoutes: Routes = [
     DataTableComponent,
     AddCategoryComponent,
     CategoryComponent,
-    AccordionFormComponent
+    AccordionFormComponent,
+    DeleteItemComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(ReferencesData, { dataEncapsulation: false }),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    MatExpansionModule,
+    MatIconModule
   ],
   providers: [ 
     AddItemService,
