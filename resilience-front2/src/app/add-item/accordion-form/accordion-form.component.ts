@@ -1,9 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AddItemService } from './add-item.service';
-import { map } from 'rxjs/operators';
-import { References } from '../../shared/References.model';
-import { ReferencesImpl } from '../../shared/ReferencesImpl.model';
 
 @Component({
   selector: 'app-accordion-form',
@@ -18,7 +15,9 @@ export class AccordionFormComponent implements OnInit {
   description: any;
   name: any;
   url: any;
-  @Output() panel = new EventEmitter<String>();
+  @Output() panel = new EventEmitter<any>();
+  @Output() submit = new EventEmitter<boolean>()
+  isSubmitted: boolean = false;
   //@Output() refs = new EventEmitter<References>();;
   categories: any;
   category: any;
@@ -27,7 +26,6 @@ export class AccordionFormComponent implements OnInit {
   uniqueReference;
   idRef: number;
   title: any;
-  isFormSubmitted: boolean = false;
 
   constructor(private addItemService: AddItemService) { }
 
@@ -35,6 +33,7 @@ export class AccordionFormComponent implements OnInit {
      console.log(this.references);
   }
 
+  // On Changes, display new values into form
   ngOnChanges() {
     this.id = this.references.id;
     this.url = this.references.url;
@@ -42,11 +41,13 @@ export class AccordionFormComponent implements OnInit {
     this.description = this.references.description;
   }
 
+  // Permits to add new category but not functional for now
   addCategory() {
     this.categories.push({id: this.index++});
     console.log(this.categories);
   }
 
+  // idem
   onSelected(value: any) {
     console.log(value);
     this.category.forEach((item) => {
@@ -57,17 +58,12 @@ export class AccordionFormComponent implements OnInit {
     this.category.push(value);
   }
 
+  // subscription of the post method to add a new reference
   addReferences(reference) {
     this.addItemService.sendReferences(reference)
-      
       .subscribe(
         (ref: any) => {
           console.log('Request sendReferences successful', ref);
-          //this.references = ref;
-          //this.idRef = this.ref.id
-          //console.log(ref);
-          //this.refs.push(ref);
-          //this.refs.emit(ref);
           this.id = ref.id;
           this.name = ref.name;
           this.url = ref.url;
@@ -78,13 +74,15 @@ export class AccordionFormComponent implements OnInit {
         });
   }
 
+  // Action to perform when submitting the form (e.g. a new reference)
   onSubmit(form: NgForm) {
-    //this.reference = { id: form.value.i, url: form.value.url, name: form.value.name, description: form.value.description, category: []};
     console.log('form value when submitting', form.value);
     this.reference = { id: this.index, name: form.value.name, url: form.value.url, description: form.value.description };
-    this.addReferences(this.reference);
     this.panel.emit(this.reference);
-    this.isFormSubmitted = true;
+    this.submit.emit(!this.isSubmitted);
+    this.addReferences(this.reference);
+    this.createOrUpdate = 'Update Reference';
     form.form.markAsPristine;
+    this.isSubmitted = true;
   }
 }

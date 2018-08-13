@@ -3,14 +3,14 @@
       <div class="form-group">
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
           <label for="url"></label>
-          <input type="text" id="url" name="url" class="form-control" placeholder="URL" [(ngModel)]="url" required [disabled]="isFormSubmitted" [value]="url">
+          <input type="text" id="url" name="url" class="form-control" placeholder="URL" [(ngModel)]="url" required [value]="url">
           <label for="name"></label>
-          <input type="text" id="name" name="name" class="form-control" placeholder="Name" [(ngModel)]="name" required [disabled]="isFormSubmitted" [value]="name">
+          <input type="text" id="name" name="name" class="form-control" placeholder="Name" [(ngModel)]="name" required [value]="name">
           <label for="description"></label>
           <input type="text" id="description" name="description" class="form-control" placeholder="Description" [(ngModel)]="description" required
-           [disabled]="isFormSubmitted" [value]="description">
+            [value]="description">
           <br>
-          <button class="btn btn-primary btn-lg col-md-12" type="submit" [disabled]="f.invalid"> {{ createOrUpdate }} </button>
+          <button class="btn btn-primary btn-lg col-md-12" type="submit" [disabled]="f.invalid"> {{ createOrUpdate }}</button>
         </form>
       </div>
     </div>
