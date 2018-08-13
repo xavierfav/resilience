@@ -1,3 +1,16 @@
 h1 {
     text-align: center;
 }
+
+.jumbotron {
+    background-color: rgba(195, 181, 219, 0.795);
+}
+
+.create {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.create-parent {
+    display:table;
+}
