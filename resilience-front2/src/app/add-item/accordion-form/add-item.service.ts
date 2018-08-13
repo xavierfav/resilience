@@ -16,7 +16,8 @@ export class AddItemService {
   constructor(private httpClient: HttpClient, private cookieService: CookieService) { 
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'X-CSRFToken': this.getCookie()
+      'X-CSRFToken': this.getCookie(),
+       observe: 'response'
     });
   }
 
@@ -33,13 +34,13 @@ export class AddItemService {
   sendReferences(data) {
     this.options = { headers: this.headers};
     //let body = JSON.stringify(data);
-    return this.httpClient.post(this.url, data, this.options);
+    return this.httpClient.post<References>(this.url, data, this.options);
   }
 
   updateReference(data) {
     this.options = { headers: this.headers};
     //let body = JSON.stringify(data);
-    return this.httpClient.post(this.url + '/' + data.id, this.options);
+    return this.httpClient.put<References>(this.url + '/' + data.id, data, this.options);
   }
 
   getReferences() {
@@ -48,5 +49,9 @@ export class AddItemService {
 
   getOneReference(id) {
     return this.httpClient.get<References>(this.url + '/' + id);
+  }
+
+  deleteReference(id) {
+    return this.httpClient.delete(this.url + '/' + id);
   }
 }

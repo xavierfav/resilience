@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AddItemService } from './add-item.service';
 import { map } from 'rxjs/operators';
 import { ReferencesImpl } from '../../shared/ReferencesImpl.model';
+import { References } from '../../shared/references.model';
 
 @Component({
   selector: 'app-accordion-form',
@@ -77,9 +78,10 @@ export class AccordionFormComponent implements OnInit {
   }
 
   updateReference(reference) {
+    console.log(reference);
     this.addItemService.updateReference(reference)
       .subscribe(
-        (ref) => {
+        (ref: any) => {
           console.log('Request updateReference successful', ref);
         },
         (error) => {
