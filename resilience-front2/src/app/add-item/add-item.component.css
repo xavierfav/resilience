@@ -5,10 +5,20 @@
 .category {
     height: 50px;
 }
-.add-reference {
+.add-reference, .delete-reference {
     height: 50px;
 }
 
 .category-text { 
     color: white;
+}
+
+.example-headers-align .mat-expansion-panel-header-title, 
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
 }

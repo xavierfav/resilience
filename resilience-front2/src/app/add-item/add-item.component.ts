@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { AddItemService } from './accordion-form/add-item.service';
 import { ReferencesImpl } from '../shared/ReferencesImpl.model';
-import { NgbAccordion, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-add-item',
@@ -23,8 +23,11 @@ export class AddItemComponent implements OnInit {
   refs: any[] = [];
   title: any[] = [];
   lastCreated: any = [];
-  createOrUpdate: string;
+  createOrUpdate: string = 'Create Reference';
   submit: boolean;
+  step = 0;
+  isCreated: boolean = false;
+  @ViewChild('accordion') acc;
 
   constructor(private addItemService: AddItemService) { }
 
@@ -52,12 +55,13 @@ export class AddItemComponent implements OnInit {
   }
 
   // Add new reference on clic 'Add Reference'
-  addReference(acc :NgbAccordion) {
+  addReference() {
       this.refs.push({id: this.index + 1, name: '', url: '', description: '' });
       console.log('references value when adding new', this.refs);
-      this.lastCreated = 'ngb-panel-' + (this.index + 1);
       this.index++;
       this.createOrUpdate = 'Create Reference';
+      console.log(this.acc.id);
+      this.isCreated = true;
   }
 
   // When panel is open, display the values
@@ -87,22 +91,40 @@ export class AddItemComponent implements OnInit {
   }
 
   // Manage the colors and create/update button when toggling panels
-   toggleAccordion(props: NgbPanelChangeEvent, acc: NgbAccordion): void {
-     console.log(acc);
-     acc.type = 'default';
-     var index = props.panelId.split('ngb-panel-')[1]; 
-    if (props.nextState == true && this.refs[index].url != '') {
-      this.getReference(+index);
-      acc.type = 'secondary';
-      this.createOrUpdate = 'Update Reference';
-      this.lastCreated = 'ngb-panel-' + (index);
-    } else if (props.nextState == true && this.refs[index].url == ''){
-      acc.type = 'secondary';
-      this.createOrUpdate = 'Create Reference';
-      this.lastCreated = 'ngb-panel-' + (index);
-    } else {
-      acc.toggle;
-      acc.type = 'default';
-    }
-  }
+  //  toggleAccordion(props: NgbPanelChangeEvent, acc: NgbAccordion): void {
+  //    console.log(acc);
+  //    acc.type = 'default';
+  //    var index = props.panelId.split('ngb-panel-')[1]; 
+  //   if (props.nextState == true && this.refs[index].url != '') {
+  //     this.getReference(+index);
+  //     acc.type = 'secondary';
+  //     this.createOrUpdate = 'Update Reference';
+  //     this.lastCreated = 'ngb-panel-' + (index);
+  //   } else if (props.nextState == true && this.refs[index].url == ''){
+  //     acc.type = 'secondary';
+  //     this.createOrUpdate = 'Create Reference';
+  //     this.lastCreated = 'ngb-panel-' + (index);
+  //   } else {
+  //     acc.toggle;
+  //     acc.type = 'default';
+  //   }
+  // }
+
+  // preventOpening(event:Event) {
+  //   event.preventDefault();
+  //   console.log("Clicked");
+  //   event.stopPropagation();
+  // }
+
+  // setStep(index: number) {
+  //   this.step = index;
+  // }
+
+  // nextStep() {
+  //   this.step++;
+  // }
+
+  // prevStep() {
+  //   this.step--;
+  // }
 }

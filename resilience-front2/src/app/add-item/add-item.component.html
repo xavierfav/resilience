@@ -1,33 +1,65 @@
 <div class="container">
   <div class="row justify-content-md-left">
-    <div class="col-md-3">
-      <button class="btn btn-primary btn-lg col-md-12 add-reference"(click)="addReference(acc)">
+    <div class="col-md-12">
+      <button class="btn btn-primary btn-lg col-md-4 add-reference"(click)="addReference()">
         <a [routerLink]="id">
-          <span class="category-text"> Add new reference</span>
+          <span class="category-text" (click)="toOpen == id"> Add new reference</span>
         </a>
+      </button>
+      <button class="btn btn-danger btn-lg offset-md-4 col-md-4 delete-reference"(click)="deleteReference()">
+          <a [routerLink]="id">
+            <span class="category-text"> Delete references</span>
+          </a>
       </button>
       <br>
     </div>
-    <!-- <div class="col-md-9" *ngIf="isSubmited">
-        <app-data-table [id]="idRef" [rowDatasHeader]="rowHeader" [categoryDatas]="categoryDatas"></app-data-table> 
-    </div> -->
   </div>
   <br>
-  <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" [activeIds]="lastCreated" type="default" *ngFor="let ref of refs; let i = index" (panelChange)="toggleAccordion($event, acc)">
+  <!-- <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" [activeIds]="lastCreated" type="default" *ngFor="let ref of refs; let i = index" (panelChange)="toggleAccordion($event, acc)">
     <ngb-panel>
-        <ng-template *ngIf="ref.name; else newReference" ngbPanelTitle>
-          {{ ref.name }}
-          
-        </ng-template>
-        <app-delete-item [index]="i"></app-delete-item>
-        <ng-template #newReference ngbPanelTitle>
-          New Reference
-          
-        </ng-template>
         
+        <ng-template *ngIf="ref.name; else newReference" ngbPanelTitle>
+          <span>{{ ref.name }} </span>
+         
+        </ng-template>
+        <ng-template #newReference ngbPanelTitle>
+          <span>New Reference </span>
+          <button (click)="preventOpening($event)"><app-delete-item [id]="i"></app-delete-item></button>
+        </ng-template>
         <ng-template ngbPanelContent>
           <app-accordion-form [index]="i" [id]="ref.id" (submit)="isSubmitted($event, i)" (panel)="onTogglePanel($event, i)" [references]="ref" [createOrUpdate]="createOrUpdate"></app-accordion-form>
         </ng-template>
-    </ngb-panel>
-  </ngb-accordion>
+    </ngb-panel> -->
+  <!-- </ngb-accordion> -->
+
+  <mat-accordion class="example-headers-align" >
+      <mat-expansion-panel #accordion *ngFor="let ref of refs; let i = index" [id]="ref.id" [expanded]="isCreated" (opened)="setStep(i)" hideToggle multi>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div *ngIf="ref.name; else newRef">
+              <span>{{ ref.name }} </span>
+            </div>
+            <ng-template #newRef>
+              <span>New Reference</span>
+            </ng-template>
+          </mat-panel-title>
+          <mat-panel-description>
+            <div *ngIf="ref.url; else newUrl">
+                {{ ref.url }}
+            </div>
+           <ng-template #newUrl>
+              <span>New URL</span>
+            </ng-template>
+           <button mat-button color="danger"><app-delete-item [id]="i"></app-delete-item></button>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <app-accordion-form [index]="i" [id]="ref.id" (submit)="isSubmitted($event, i)" (panel)="onTogglePanel($event, i)" [references]="ref" [createOrUpdate]="createOrUpdate"></app-accordion-form>
+          <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+          </mat-action-row>
+        </ng-template>
+      </mat-expansion-panel>
+    </mat-accordion>
 </div>
