@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "~@angular/material/prebuilt-themes/purple-green.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 .btn-link {
     color: white;
+}
+
+.mat-expansion-panel-body {
+    background-color: rgba(195, 181, 219, 0.795);
 }
