@@ -18,11 +18,8 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { AddItemComponent } from './add-item/add-item.component';
-import { DataTableComponent } from './add-item/data-table/data-table.component';
 import { AddItemService } from './add-item/accordion-form/add-item.service';
 import { AddCategoryComponent } from './add-item/accordion-form/add-category/add-category.component';
-import { CategoryComponent } from './add-item/data-table/category/category.component';
-import { DataTableService } from './add-item/data-table/data-table.service';
 import { ReferencesData } from './shared/references-data';
 import { AccordionFormComponent } from './add-item/accordion-form/accordion-form.component';
 
@@ -42,9 +39,7 @@ const appRoutes: Routes = [
     FooterComponent,
     HeaderComponent,
     AddItemComponent,
-    DataTableComponent,
     AddCategoryComponent,
-    CategoryComponent,
     AccordionFormComponent,
   ],
   imports: [
@@ -65,8 +60,7 @@ const appRoutes: Routes = [
   ],
   providers: [ 
     AddItemService,
-    CookieService,
-    DataTableService 
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
