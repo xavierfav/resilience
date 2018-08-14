@@ -21,14 +21,12 @@ export class AccordionFormComponent implements OnInit {
   @Output() panel = new EventEmitter<any>();
   @Output() submit = new EventEmitter<boolean>()
   isSubmitted: boolean = false;
-  //@Output() refs = new EventEmitter<References>();;
-  categories: any;
-  category: any;
   reference: any;
   @Input() references: any;
   uniqueReference;
   idRef: number;
   title: any;
+  categoryArray: any[] = [];
 
   constructor(private addItemService: AddItemService) { }
 
@@ -44,22 +42,11 @@ export class AccordionFormComponent implements OnInit {
     this.description = this.references.description;
   }
 
-  // Permits to add new category but not functional for now
-  // addCategory() {
-  //   this.categories.push({id: this.index++});
-  //   console.log(this.categories);
-  // }
-
-  // idem
-  // onSelected(value: any) {
-  //   console.log(value);
-  //   this.category.forEach((item) => {
-  //     if (item[0] !== undefined && item[0].id !== undefined && item[0].id === value[0].id) {
-  //         this.category.splice(this.category.indexOf(item), 1);
-  //     } 
-  //   });
-  //   this.category.push(value);
-  // }
+  //get categories from add-category whenever the overlay is closed
+  getCategories(event) {
+    this.categoryArray = event;
+    console.log(this.categoryArray);
+  }
 
   // subscription of the post method to add a new reference
   addReferences(reference) {
@@ -93,7 +80,8 @@ export class AccordionFormComponent implements OnInit {
   // Action to perform when submitting the form (e.g. a new reference)
   onSubmit(form: NgForm) {
     console.log('form value when submitting', form.value, this.id);
-    this.reference = { id: this.id, name: form.value.name, url: form.value.url, description: form.value.description };
+    this.reference = { id: this.id, name: form.value.name, url: form.value.url, description: form.value.description, category: this.categoryArray };
+    console.log(this.reference);
     this.panel.emit(this.reference);
     this.submit.emit(!this.isSubmitted);
 

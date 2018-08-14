@@ -8,9 +8,9 @@
       </button>
       <br>
     </div>
-  
+    <br>
   <br>
-      <div class="col-md-12">
+<div class="col-md-12">
   <mat-accordion class="example-headers-align" >
       <mat-expansion-panel #accordion *ngFor="let ref of refs; let i = index" [id]="ref.id" [expanded]="step === ref.id" (opened)="setStep(ref.id)" multi="true">
         <mat-expansion-panel-header>

@@ -1,37 +1,43 @@
 <div class="row justify-content-md-left">
-    <div class="col-md-6">
-      <div class="form-group">
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-          <br>
-          <div class="big-class">
+  <div class="col-md-6">
+    <div class="form-group">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <br>
+        <div class="big-class">
           <mat-form-field>
-              <label for="name"></label>
+            <label for="name"></label>
             <input matInput type="text" id="name" name="name" class="form-control" placeholder="Name" [(ngModel)]="name" required [value]="name">
           </mat-form-field>
           <br>
           <mat-form-field>
-              <label for="url"></label>
+            <label for="url"></label>
             <input matInput type="text" id="url" name="url" class="form-control" placeholder="URL" [(ngModel)]="url" required [value]="url">
           </mat-form-field>
           <br>
           <mat-form-field>
-              <label for="description"></label>
-            <textarea matInput type="text" id="description" name="description" class="form-control" placeholder="Description" [(ngModel)]="description" required
-              [value]="description" rows="10"></textarea>
+            <label for="description"></label>
+            <textarea matInput type="text" id="description" name="description" class="form-control" placeholder="Description" [(ngModel)]="description"
+              required [value]="description" rows="10"></textarea>
           </mat-form-field>
           <br>
           <div>
-            <button class="btn btn-primary btn-lg col-md-12" type="submit" [disabled]="f.invalid"><span class="create"> {{ createOrUpdate }} &nbsp;</span><mat-icon>update</mat-icon></button>
-          </div> 
-        </div> 
-        </form>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="add-category">
-        <app-add-category></app-add-category>
-        <br>
-        <br>
-      </div>
+            <button class="btn btn-primary btn-lg col-md-12" type="submit" [disabled]="f.invalid">
+              <span class="create"> {{ createOrUpdate }} &nbsp;</span>
+              <mat-icon>update</mat-icon>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
+  <div class="offset-sm-1 col-md-4">
+    <div class="add-category">
+      <br>
+      <br>
+      <br>
+      <app-add-category [categoriesInit]="references.category" (categoryArray)="getCategories($event)"></app-add-category>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>

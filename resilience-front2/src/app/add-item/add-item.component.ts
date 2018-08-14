@@ -43,7 +43,7 @@ export class AddItemComponent implements OnInit {
         console.log('Request successful', references);
         if (references != null) {
           references.forEach((reference) => {
-            this.refs.push({ id: reference.id, name: reference.name, url: reference.url, description: reference.description });
+            this.refs.push({ id: reference.id, name: reference.name, url: reference.url, description: reference.description, category: reference.category });
           })
           this.index = references[references.length - 1].id;
           console.log(this.index);
@@ -90,26 +90,6 @@ export class AddItemComponent implements OnInit {
     this.submit = value;
     console.log('form is submitted ?', value);
   }
-
-  // Manage the colors and create/update button when toggling panels
-  //  toggleAccordion(props: NgbPanelChangeEvent, acc: NgbAccordion): void {
-  //    console.log(acc);
-  //    acc.type = 'default';
-  //    var index = props.panelId.split('ngb-panel-')[1]; 
-  //   if (props.nextState == true && this.refs[index].url != '') {
-  //     this.getReference(+index);
-  //     acc.type = 'secondary';
-  //     this.createOrUpdate = 'Update Reference';
-  //     this.lastCreated = 'ngb-panel-' + (index);
-  //   } else if (props.nextState == true && this.refs[index].url == ''){
-  //     acc.type = 'secondary';
-  //     this.createOrUpdate = 'Create Reference';
-  //     this.lastCreated = 'ngb-panel-' + (index);
-  //   } else {
-  //     acc.toggle;
-  //     acc.type = 'default';
-  //   }
-  // }
 
   preventOpening(event:Event) {
     event.preventDefault();
