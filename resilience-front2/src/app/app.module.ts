@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
@@ -10,8 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
@@ -25,7 +26,7 @@ import { DataTableService } from './add-item/data-table/data-table.service';
 import { ReferencesData } from './shared/references-data';
 import { AccordionFormComponent } from './add-item/accordion-form/accordion-form.component';
 import { DeleteItemComponent } from './add-item/delete-item/delete-item.component';
-import { MatInputModule } from '@angular/material';
+
 
 const appRoutes: Routes = [
   { path: 'addReference', component: AddItemComponent,
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(ReferencesData, { dataEncapsulation: false }),
@@ -59,7 +61,7 @@ const appRoutes: Routes = [
     MatExpansionModule,
     MatIconModule,
     MatButtonModule,
-    MatMenuModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule
   ],
