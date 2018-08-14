@@ -25,7 +25,6 @@ import { CategoryComponent } from './add-item/data-table/category/category.compo
 import { DataTableService } from './add-item/data-table/data-table.service';
 import { ReferencesData } from './shared/references-data';
 import { AccordionFormComponent } from './add-item/accordion-form/accordion-form.component';
-import { DeleteItemComponent } from './add-item/delete-item/delete-item.component';
 
 
 const appRoutes: Routes = [
@@ -47,7 +46,6 @@ const appRoutes: Routes = [
     AddCategoryComponent,
     CategoryComponent,
     AccordionFormComponent,
-    DeleteItemComponent
   ],
   imports: [
     BrowserModule,
