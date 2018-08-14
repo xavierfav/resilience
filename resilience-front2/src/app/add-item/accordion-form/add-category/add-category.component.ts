@@ -22,7 +22,10 @@ export class AddCategoryComponent implements OnInit {
   @Output() categoryArray = new EventEmitter<any[]>();
   selectedOption: any[] = [];
   currentSelected: any[] = [];
+
+  // WIP- reactive form for category
   pokemonControl = new FormControl();
+  // WIP hardcoded data for category
   pokemonGroups: PokemonGroup[] = [
     {
       name: 'Grass',
@@ -59,25 +62,22 @@ export class AddCategoryComponent implements OnInit {
 
   constructor() { }
 
+  // on init, get the categories from db (from add-item) and push them to the view
   ngOnInit() {
-    console.log('get values of categories from db :', this.categoriesInit);
     this.categoriesInit.forEach((category) => {
       this.selectedOption.push(category.id);
     });
-    console.log('valueof preselect : ', this.selectedOption);
   }
     
-    
+  // get value of the select when clicking one or many options
   onSelect(event) {
-    console.log(event);
     this.currentSelected = [event.value];
-    console.log(this.currentSelected);
   }
 
+  // send category object to accordion-form when closing the overlay
   forwardCategories(event) {
     if (event == false) {
       this.categoryArray.emit(this.currentSelected);
-      console.log(this.currentSelected);
     }
   }
 }
