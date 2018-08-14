@@ -7,6 +7,7 @@
 }
 .add-reference, .delete-reference {
     height: 50px;
+    border-radius: 15px;
 }
 
 .category-text { 
@@ -34,4 +35,10 @@
 
 .url-forward-parent {
     display:table;
+}
+
+.add-item {
+    border-style: groove;
+    border: 2px solid lightblue;
+    border-radius: 15px;
 }

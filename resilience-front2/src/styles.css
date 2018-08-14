@@ -1,13 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+/* @import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; */
 
-.btn-link {
+/* .btn-link {
     color: white;
-}
+} */
 
 .mat-expansion-panel-body {
-    background-color: rgba(195, 181, 219, 0.795);
+    background-color: rgba(255, 150, 236, 0.1);
 }
 
-html { margin-bottom: 65px }
+.mat-expansion-panel-header .mat-expanded {
+    background: rgba(255, 255, 236, 0.315) !important;
+}
+
+html { margin-bottom: 65px } 
+
+body{
+    margin: 0%;
+}

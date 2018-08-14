@@ -3,7 +3,7 @@
     <div class="form-group">
       <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <br>
-        <div class="big-class">
+        <div class="big-class specific-class">
           <mat-form-field>
             <label for="name"></label>
             <input matInput type="text" id="name" name="name" class="form-control" placeholder="Name" [(ngModel)]="name" required [value]="name">
@@ -21,9 +21,9 @@
           </mat-form-field>
           <br>
           <div>
-            <button class="btn btn-primary btn-lg col-md-12" type="submit" [disabled]="f.invalid">
-              <span class="create"> {{ createOrUpdate }} &nbsp;</span>
-              <mat-icon>update</mat-icon>
+            <button mat-flat-button style="color:rgba(100, 100, 100);" class="btn btn-primary btn-lg col-md-12 create-ref" type="submit" [disabled]="f.invalid">
+              <span class="create-text"> {{ createOrUpdate }} &nbsp;</span>
+              <mat-icon color="black">update</mat-icon>
             </button>
           </div>
         </div>

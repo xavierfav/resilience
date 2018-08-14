@@ -8,6 +8,25 @@ input, textarea {
   flex-direction: column;
 }
 
+.form-control {
+      margin: 0 auto;
+      border: none; 
+      border:solid 1px #ccc;
+      border-radius: 10px;
+}
+
 .big-class > * {
     width: 100%;
 }
+
+::ng-deep .specific-class > .mat-expansion-panel-header {
+    background-color: rgba(255, 255, 255, 0.795);
+  }
+
+  .create-ref {
+    border-radius: 15px;
+  }
+
+  .create-text {
+      color: rgba(100, 100, 100);
+  }
