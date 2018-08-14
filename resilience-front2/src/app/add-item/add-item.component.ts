@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { AddItemService } from './accordion-form/add-item.service';
 import { ReferencesImpl } from '../shared/ReferencesImpl.model';
-import { References } from '../shared/references.model';
 
 
 @Component({
@@ -12,23 +11,10 @@ import { References } from '../shared/references.model';
 })
 export class AddItemComponent implements OnInit {
 
-  isSubmited: boolean = false;
-  categories: any [] = [];
   index: any = 0;
-  category: any[] = [];
-  categoryDatas: any[] = [];
-  reference: any;
-  references: any;
-  id: number;
-  showForm: boolean;
   refs: any[] = [];
-  title: any[] = [];
-  lastCreated: any = [];
   createOrUpdate: string = 'Update Reference';
-  submit: boolean;
   step: number;
-  isCreated: boolean = false;
-  @ViewChild('accordion') acc;
 
   constructor(private addItemService: AddItemService) { }
 
@@ -60,8 +46,6 @@ export class AddItemComponent implements OnInit {
       this.refs.push({id: this.index + 1, name: '', url: '', description: '' });
       console.log('references value when adding new', this.refs);
       this.index++;
-      console.log(this.acc.id);
-      this.isCreated = true;
   }
 
   // When panel is open, display the values
@@ -86,11 +70,6 @@ export class AddItemComponent implements OnInit {
       );
   }
   
-  isSubmitted(value) {
-    this.submit = value;
-    console.log('form is submitted ?', value);
-  }
-
   preventOpening(event:Event) {
     event.preventDefault();
     console.log("Clicked");

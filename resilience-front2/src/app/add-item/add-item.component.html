@@ -38,7 +38,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
-          <app-accordion-form [index]="i" [id]="ref.id" (submit)="isSubmitted($event, i)" (panel)="onTogglePanel($event, i)" [references]="ref" [createOrUpdate]="createOrUpdate"></app-accordion-form>
+          <app-accordion-form [index]="i" [id]="ref.id" (panel)="onTogglePanel($event, i)" [references]="ref" [createOrUpdate]="createOrUpdate"></app-accordion-form>
           <mat-action-row>
               <button mat-icon-button color="basic" (click)="prevStep()"> 
                 <mat-icon>keyboard_arrow_left</mat-icon>
