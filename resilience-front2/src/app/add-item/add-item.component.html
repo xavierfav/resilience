@@ -13,10 +13,10 @@
     <div class="col-md-12">
       <mat-accordion class="example-headers-align">
         <mat-expansion-panel #accordion *ngFor="let ref of refs; let i = index" [id]="ref.id" [expanded]="step === ref.id" (opened)="setStep(ref.id)"
-          multi="true">
+          multi>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <div *ngIf="ref.name; else newRef">
+              <div class="panel-name" *ngIf="ref.name; else newRef">
                 <span>{{ ref.name }} </span>
               </div>
               <ng-template #newRef>
@@ -41,12 +41,14 @@
           <ng-template matExpansionPanelContent>
             <app-accordion-form [index]="i" [id]="ref.id" (panel)="onTogglePanel($event, i)" [references]="ref" [createOrUpdate]="createOrUpdate"></app-accordion-form>
             <mat-action-row>
-              <button mat-fab color="accent" (click)="prevStep()">
-                <mat-icon>keyboard_arrow_left</mat-icon>
-              </button>
-              <button mat-fab color="accent" (click)="nextStep()">
-                <mat-icon>keyboard_arrow_right</mat-icon>
-              </button>
+              <div align="right">
+                <button mat-fab color="accent" (click)="prevStep()">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+                <button mat-fab color="accent" (click)="nextStep()">
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                </button>
+              </div>
             </mat-action-row>
           </ng-template>
         </mat-expansion-panel>

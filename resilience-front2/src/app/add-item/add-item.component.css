@@ -41,4 +41,9 @@
     border-style: groove;
     border: 2px solid lightblue;
     border-radius: 15px;
+    background-color: rgba(190, 157, 157, 0.6);
+}
+
+.panel-name {
+    margin-top:10px;
 }
