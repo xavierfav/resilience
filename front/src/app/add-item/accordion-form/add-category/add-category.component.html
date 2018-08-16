@@ -1,0 +1,13 @@
+<div class="big-class">
+  <mat-form-field>
+    <mat-select placeholder="Categories" [(ngModel)]="selectedOption" (openedChange)="forwardCategories($event)" [formControl]="pokemonControl"
+      multiple (selectionChange)="onSelect($event)">
+      <mat-option>-- None --</mat-option>
+      <mat-optgroup *ngFor="let group of pokemonGroups; let i = index" [label]="group.name" [disabled]="group.disabled">
+        <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.id">
+          {{pokemon.value}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+</div>
