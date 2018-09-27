@@ -16,13 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from resilience.views import *
+from catalogue.resources import ReferenceResource
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^$', home, name='home'),
     url(r'', include('catalogue.urls')),
-    url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
