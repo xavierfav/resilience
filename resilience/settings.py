@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'catalogue',
     'webpack_loader',
-    'resilience'
+    'resilience',
+    'tastypie'
 ]
 
 MIDDLEWARE = [
