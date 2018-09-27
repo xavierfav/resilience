@@ -1,8 +1,24 @@
-{% extends "base.html" %}
+{% load render_bundle from webpack_loader %}
 
+<html  lang="en">
+<head>
+<meta  charset="UTF-8">
+<base  href="/">
+<title>Resilience</title>
+<link href="../static/css/open-iconic-bootstrap.css" rel="stylesheet">
+<link href="../static/fonts/open-iconic.otf" rel="stylesheet">
+<link href="../static/fonts/open-iconic.ttf" rel="stylesheet">
+<link href="../static/fonts/open-iconic.woff" rel="stylesheet">
+</head>
+<body>
 
-{% block content %}
-    <div class="ui center aligned container">
-        <p>This is the home page!</p>
-    </div>
-{% endblock %}
+<app-root></app-root>
+
+{% render_bundle 'inline' %}
+{% render_bundle 'polyfills' %}
+{% render_bundle 'styles' %}
+{% render_bundle 'vendor' %}
+{% render_bundle 'main' %}
+
+</body>
+</html>

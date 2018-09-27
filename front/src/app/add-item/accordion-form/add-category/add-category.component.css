@@ -1,0 +1,15 @@
+.-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+
+  .big-class {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .big-class > * {
+      width: 100%;
+  }
+
+ 

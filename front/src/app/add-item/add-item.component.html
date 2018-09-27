@@ -1,0 +1,58 @@
+<div class="container add-item">
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <button mat-flat-button color="primary" class="btn btn-lg col-md-12 add-reference" (click)="addReference()">
+        <a [routerLink]="id">
+          <span class="category-text"> Add new reference</span>
+        </a>
+      </button>
+      <br>
+      <hr>
+    </div>
+    <div class="col-md-12">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel #accordion *ngFor="let ref of refs; let i = index" [id]="ref.id" [expanded]="step === ref.id" (opened)="setStep(ref.id)"
+          multi>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="panel-name" *ngIf="ref.name; else newRef">
+                <span>{{ ref.name }} </span>
+              </div>
+              <ng-template #newRef>
+                <span>New Reference</span>
+              </ng-template>
+            </mat-panel-title>
+            <mat-panel-description>
+              <div *ngIf="ref.url; else newUrl" class="url-forward-parent">
+                <a href="{{ ref.url }}" target="_blank" rel="noopener noreferrer">
+                  <p class="url-forward"> {{ ref.url }} &nbsp;</p>
+                  <mat-icon>open_in_browser</mat-icon>
+                </a>
+              </div>
+              <ng-template #newUrl>
+                <span>New URL</span>
+              </ng-template>
+              <button mat-icon-button color="warn" (click)="deleteReference(i)">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+            <app-accordion-form [index]="i" [id]="ref.id" (panel)="onTogglePanel($event, i)" [references]="ref" [createOrUpdate]="createOrUpdate"></app-accordion-form>
+            <mat-action-row>
+              <div align="right">
+                <button mat-fab color="accent" (click)="prevStep()">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+                <button mat-fab color="accent" (click)="nextStep()">
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                </button>
+              </div>
+            </mat-action-row>
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br>
+    </div>
+  </div>
