@@ -30,7 +30,7 @@ import { AccordionFormComponent } from './add-item/accordion-form/accordion-form
 const appRoutes: Routes = [
   { path: 'addReference', component: AddItemComponent,
    children: [ { path: 'addReference/:id', component: AccordionFormComponent }
-             ] 
+             ]
   },
   { path: 'addCategory/:id', component: AddCategoryComponent },
   { path: '', component: AddItemComponent }
@@ -52,7 +52,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(ReferencesData, { dataEncapsulation: false }),
+    // HttpClientInMemoryWebApiModule.forRoot(ReferencesData, { dataEncapsulation: false }),
     NgbModule.forRoot(),
     MatExpansionModule,
     MatIconModule,
@@ -64,7 +64,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     FlexLayoutModule
   ],
-  providers: [ 
+  providers: [
     AddItemService,
     CookieService
   ],

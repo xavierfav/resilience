@@ -7,13 +7,13 @@ import { References } from '../../shared/references.model';
 @Injectable()
 export class AddItemService {
 
-  url: any = 'api/references';
+  url: any = 'http://localhost:8000/api/reference';//'api/references';
   csrfToken: any;
   headers: any;
   options: any;
 
   // build the header
-  constructor(private httpClient: HttpClient, private cookieService: CookieService) { 
+  constructor(private httpClient: HttpClient, private cookieService: CookieService) {
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'X-CSRFToken': this.getCookie(),

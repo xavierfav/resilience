@@ -5,14 +5,14 @@ export class ReferencesImpl implements References {
     name: String;
     url: String;
     description: String;
-    category: String[]
-    
+    // category: String[]
+
 
     constructor(references: References) {
         this.id = references.id;
         this.name = references.name;
         this.url = references.url;
         this.description = references.description;
-        this.category = references.category;
+        // this.category = references.category;
     }
 }

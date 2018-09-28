@@ -29,7 +29,7 @@ export class AddItemComponent implements OnInit {
         console.log('Request successful', references);
         if (references != null) {
           references.forEach((reference) => {
-            this.refs.push({ id: reference.id, name: reference.name, url: reference.url, description: reference.description, category: reference.category });
+            this.refs.push({ id: reference.id, name: reference.name, url: reference.url, description: reference.description});//, category: reference.category });
           })
           this.index = references[references.length - 1].id;
           console.log(this.index);
@@ -56,7 +56,7 @@ export class AddItemComponent implements OnInit {
       this.refs[i].name = value.name;
       this.refs[i].url = value.url;
       this.refs[i].description = value.description;
-    } 
+    }
   }
 
   // subscription to display one reference into the panel given the ID
@@ -69,7 +69,7 @@ export class AddItemComponent implements OnInit {
         (error) => console.log('ERROR request getOneReference', error)
       );
   }
-  
+
   preventOpening(event:Event) {
     event.preventDefault();
     console.log("Clicked");
@@ -104,7 +104,7 @@ export class AddItemComponent implements OnInit {
     console.log('index to delete', index);
     this.addItemService.deleteReference(index)
       .subscribe(
-        (ref: any) => { 
+        (ref: any) => {
           console.log('Delete success', ref);
         },
         (error) => {
