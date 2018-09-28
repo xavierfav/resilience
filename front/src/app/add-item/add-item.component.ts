@@ -22,7 +22,7 @@ export class AddItemComponent implements OnInit {
   ngOnInit() {
     this.addItemService.getReferences()
     .pipe(
-      map(references => references.map(i => new ReferencesImpl(i)))
+      map(references => references["objects"].map(i => new ReferencesImpl(i)))
     )
     .subscribe(
       (references) => {

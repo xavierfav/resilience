@@ -7,7 +7,7 @@ import { References } from '../../shared/references.model';
 @Injectable()
 export class AddItemService {
 
-  url: any = 'http://localhost:8000/api/reference';//'api/references';
+  url: any = 'http://localhost:8000/api/reference/';
   csrfToken: any;
   headers: any;
   options: any;
@@ -41,7 +41,7 @@ export class AddItemService {
   // update an existing reference (put)
   updateReference(data) {
     this.options = { headers: this.headers};
-    return this.httpClient.put<References>(this.url + '/' + data.id, data, this.options);
+    return this.httpClient.put<References>(this.url + data.id + '/', data, this.options);
   }
 
   // get all the references (get)
@@ -51,11 +51,11 @@ export class AddItemService {
 
   // get one reference given the id (get)
   getOneReference(id) {
-    return this.httpClient.get<References>(this.url + '/' + id);
+    return this.httpClient.get<References>(this.url + id + '/');
   }
 
   // delete a reference given the id (delete)
   deleteReference(id) {
-    return this.httpClient.delete(this.url + '/' + id);
+    return this.httpClient.delete(this.url + id + '/');
   }
 }

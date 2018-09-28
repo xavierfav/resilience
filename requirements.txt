@@ -7,3 +7,4 @@ django-tastypie
 markdown
 django-filter
 django-webpack-loader
+django-cors-headers

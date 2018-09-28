@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'catalogue',
     'webpack_loader',
     'resilience',
-    'tastypie'
+    'tastypie',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'resilience.urls'
@@ -115,6 +117,18 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+
+# CORS
+CORS_ORIGIN_WHITELIST = (
+    'localhost:4200'
+)
+
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = default_headers + (
+    'observe',
+)
 
 
 # Internationalization
