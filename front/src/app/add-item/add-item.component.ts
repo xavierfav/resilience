@@ -100,9 +100,9 @@ export class AddItemComponent implements OnInit {
     }
   }
 
-  deleteReference(index) {
+  deleteReference(index, id) {
     console.log('index to delete', index);
-    this.addItemService.deleteReference(index)
+    this.addItemService.deleteReference(id)
       .subscribe(
         (ref: any) => {
           console.log('Delete success', ref);
