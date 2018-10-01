@@ -12,3 +12,10 @@ services:
       - "8000:8000"
     depends_on:
       - db
+  front:
+    build: ./front
+    ports:
+      - "4200:4200"
+    command: ["ng", "serve", "--host", "0.0.0.0"]
+    volumes:
+      - ./front:/usr/src/app
