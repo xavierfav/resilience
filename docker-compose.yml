@@ -7,7 +7,7 @@ services:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - ".:/code"
     ports:
       - "8000:8000"
     depends_on:
@@ -18,4 +18,5 @@ services:
       - "4200:4200"
     command: ["ng", "serve", "--host", "0.0.0.0"]
     volumes:
-      - ./front:/usr/src/app
+      - "./front:/usr/src/app"
+      - "/usr/src/app/node_modules"
