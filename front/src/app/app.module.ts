@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -23,7 +22,6 @@ import { HeaderComponent } from './header/header.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { AddItemService } from './add-item/accordion-form/add-item.service';
 import { AddCategoryComponent } from './add-item/accordion-form/add-category/add-category.component';
-import { ReferencesData } from './shared/references-data';
 import { AccordionFormComponent } from './add-item/accordion-form/accordion-form.component';
 
 
@@ -52,7 +50,6 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    // HttpClientInMemoryWebApiModule.forRoot(ReferencesData, { dataEncapsulation: false }),
     NgbModule.forRoot(),
     MatExpansionModule,
     MatIconModule,
